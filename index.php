@@ -20,4 +20,5 @@ $router->add('/:a/:b/:c/:d/:e/:f', function ($a, $b, $c, $d, $e, $f)
 	return "$a<br>$b<br>$c<br>$d<br>$e<br>$f";
 });
 
+//print_r($router);
 $router->run();
