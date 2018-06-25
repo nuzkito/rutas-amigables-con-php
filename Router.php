@@ -4,6 +4,7 @@ class Router {
 
 	protected $requestUri;
 	protected $routes;
+	public static $dir_root;
 
 	const GET_PARAMS_DELIMITER = '?';
 
@@ -30,7 +31,7 @@ class Router {
 
 	public function add($uri, $closure)
 	{
-		$route = new Route($uri, $closure);
+		$route = new Route(self::$dir_root.$uri, $closure);
 		array_push($this->routes, $route);
 	}
 
@@ -43,10 +44,13 @@ class Router {
 		{
 			if ($route->checkIfMatch($requestUri))
 			{
+				//request uri es lo que se envia en el constructor
+
 				$response = $route->execute();
+				
 				// break para no seguir dando vueltas
 				// Ya se encontró la ruta correspondiente
-				break;
+				//break;
 			}
 		}
 
@@ -70,7 +74,7 @@ class Router {
 		else
 		{
 			header("HTTP/1.0 404 Not Found");
-			exit('404');
+			exit('Error 404');
 		}
 	}
 
