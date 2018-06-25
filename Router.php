@@ -4,6 +4,7 @@ class Router {
 
 	protected $requestUri;
 	protected $routes;
+	public static $dir_root;
 
 	const GET_PARAMS_DELIMITER = '?';
 
@@ -30,7 +31,7 @@ class Router {
 
 	public function add($uri, $closure)
 	{
-		$route = new Route("/rutas-amigables-con-php".$uri, $closure);
+		$route = new Route(self::$dir_root.$uri, $closure);
 		array_push($this->routes, $route);
 	}
 
